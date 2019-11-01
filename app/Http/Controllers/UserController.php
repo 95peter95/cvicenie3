@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 
 class UserController
@@ -10,39 +11,59 @@ class UserController
 public function showAction($id)
 {
 $user = User::find($id);
-echo $user->name. " " . $user->lastname."<br>";
-echo $user->email."<br>";
-echo $user->age."<br>";
-echo $user->updated_at;
-
+return view("update", ['user' => $user]);
 }
-public function insertAction()
+public function getAddUserForm(){
+	return view("adduser");
+	}
+public function insertAction(Request $request)
 {
+$name = $request->input('name');
+$lastname = $request->input('lastname');
+$email = $request->input('email');
+$age = $request->input('age');
+
 $user = new User();
-$user->name = str_random(5);
-$user->lastname = str_random(5);
-$user->email = $user->name. "." . $user->lastname. "@gmail.com";
-$user->age = mt_rand(1,80);
+$user->name = $name;
+$user->lastname = $lastname;
+$user->email = $email;
+$user->age = $age;
 $user->password = bcrypt('secret');
 $user->save();
 
+return redirect()->action('UserController@showAll');
+
 }
-public function updateAction($id)
+
+public function updateAction($id, Request $request)
 {
-$user = User::where("id", "=", $id)->first();
-$user->update(["age" => mt_rand(1,80)]);
+$this->validate($request, [
+	'name' => 'required',
+	'lastname' => 'required',
+	'Email' => 'required',
+	'age' => 'required',
+]);
+$user = User::find($id);
+$user->name = $request->get('name');
+$user->lastname = $request->get('lastname');
+$user->email = $request->get('email');
+$user->age = $request->get('age');
+$user->save();
+
+return redirect()->action('UserController@showAll');
 }
+
 public function deleteAction($id)
 {
 $user= User::find($id);
 $user->delete();
+
+return redirect()->action('UserController@showAll');
 }
 public function showAll()
 {
 $users = User::all();
-	foreach ($users as $user) {
-	echo $user->id . "<br>".  $user->name. " " . $user->lastname."<br>" .$user->email . "<br>" ." " .$user->age."<br>" . " " . $user->updated_at."<br>"."<br>";
-	}
+return view("users", ['users' => $users]);
 }
 
 }
