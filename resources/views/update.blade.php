@@ -37,6 +37,7 @@
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 				<button type="submit" value="Update" class="btn btn-primary">Submit</button>
+				<a class="btn btn-warning" href="{{route('showall')}}">back</a>
 			</form>
 		</div>
 		<div class="col-sm">

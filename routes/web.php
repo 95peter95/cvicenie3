@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ 'as'=>'showall', 'uses' => 'UserController@showAll']);
 
 Route::get('/show/{id}', [ 'as'=>'show', 'uses' => 'UserController@showAction']);
 
@@ -25,7 +23,7 @@ Route::post('/update', [ 'as' => 'update', 'uses' => 'UserController@updateActio
 
 Route::get('/delete/{id}', [ 'as'=>'delete', 'uses' => 'UserController@deleteAction']);
 
-Route::get('/showall', [ 'as'=>'show', 'uses' => 'UserController@showAll']);
+
 
 
 

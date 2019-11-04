@@ -22,9 +22,10 @@
 			<table class="table table-hover">
 					<thead>
 					<tr>
-						<th scope="col">name </th>
-						<th scope="col">lastname</th>
-						<th scope="col">email</th>
+						<th scope="col">Name </th>
+						<th scope="col">Lastname</th>
+						<th scope="col">Email</th>
+						<th scope="col">Age</th>
 						<th scope="col">Edit</th>
 						<th scope="col">Delete</th>
 					</tr>
@@ -36,6 +37,7 @@
 						<td>{{ $user->name }}</td>
 						<td>{{$user->lastname}}</td>
 						<td>{{$user->email }}</td>
+						<td>{{$user->age }}</td>
 						<td><a class="btn btn-warning" href="{{action("UserController@showAction",['id' => $user->id])}}">update</a></td>
 						<td><a class="btn btn-primary" href="{{action("UserController@deleteAction",['id' => $user->id])}}">delete</a></td>
 					</tr>
