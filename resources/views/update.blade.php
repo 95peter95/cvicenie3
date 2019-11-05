@@ -35,7 +35,7 @@
 					<input type="number" class="form-control" id="exampleInputPassword1" name="age" value="{{ $user->age }}">
 				</div>
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+				<input type="hidden" name="id" value="{{ $user->id }}">
 				<button type="submit" value="Update" class="btn btn-primary">Submit</button>
 				<a class="btn btn-warning" href="{{route('showall')}}">back</a>
 			</form>

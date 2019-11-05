@@ -30,3 +30,5 @@ Route::get('/delete/{id}', [ 'as'=>'delete', 'uses' => 'UserController@deleteAct
 
 
 
+
+
